@@ -20,9 +20,9 @@ import (
 	"testing"
 
 	//lint:ignore SA1019 Need to keep deprecated package for compatibility.
-	"github.com/golang/protobuf/proto"
 
 	dto "github.com/prometheus/client_model/go"
+	"google.golang.org/protobuf/encoding/prototext"
 )
 
 // uncheckedCollector wraps a Collector but its Describe method yields no Desc.
@@ -305,10 +305,10 @@ func TestWrap(t *testing.T) {
 				var want, got []string
 
 				for i, mf := range wantMF {
-					want = append(want, fmt.Sprintf("%3d: %s", i, proto.MarshalTextString(mf)))
+					want = append(want, fmt.Sprintf("%3d: %s", i, prototext.Format(mf)))
 				}
 				for i, mf := range gotMF {
-					got = append(got, fmt.Sprintf("%3d: %s", i, proto.MarshalTextString(mf)))
+					got = append(got, fmt.Sprintf("%3d: %s", i, prototext.Format(mf)))
 				}
 
 				t.Fatalf(

@@ -23,8 +23,8 @@ import (
 	"time"
 
 	//lint:ignore SA1019 Need to keep deprecated package for compatibility.
-	"github.com/golang/protobuf/proto"
 	"github.com/prometheus/common/expfmt"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	dto "github.com/prometheus/client_model/go"
 
@@ -321,7 +321,7 @@ func ExampleSummary() {
 	// internally).
 	metric := &dto.Metric{}
 	temps.Write(metric)
-	fmt.Println(proto.MarshalTextString(metric))
+	fmt.Println(prototext.Format(metric))
 
 	// Output:
 	// summary: <
@@ -371,7 +371,7 @@ func ExampleSummaryVec() {
 	if err != nil || len(metricFamilies) != 1 {
 		panic("unexpected behavior of custom test registry")
 	}
-	fmt.Println(proto.MarshalTextString(metricFamilies[0]))
+	fmt.Println(prototext.Format(metricFamilies[0]))
 
 	// Output:
 	// name: "pond_temperature_celsius"
@@ -466,7 +466,7 @@ func ExampleNewConstSummary() {
 	// internally).
 	metric := &dto.Metric{}
 	s.Write(metric)
-	fmt.Println(proto.MarshalTextString(metric))
+	fmt.Println(prototext.Format(metric))
 
 	// Output:
 	// label: <
@@ -512,7 +512,7 @@ func ExampleHistogram() {
 	// internally).
 	metric := &dto.Metric{}
 	temps.Write(metric)
-	fmt.Println(proto.MarshalTextString(metric))
+	fmt.Println(prototext.Format(metric))
 
 	// Output:
 	// histogram: <
@@ -562,7 +562,7 @@ func ExampleNewConstHistogram() {
 	// internally).
 	metric := &dto.Metric{}
 	h.Write(metric)
-	fmt.Println(proto.MarshalTextString(metric))
+	fmt.Println(prototext.Format(metric))
 
 	// Output:
 	// label: <
@@ -748,7 +748,7 @@ func ExampleNewMetricWithTimestamp() {
 	// internally).
 	metric := &dto.Metric{}
 	s.Write(metric)
-	fmt.Println(proto.MarshalTextString(metric))
+	fmt.Println(prototext.Format(metric))
 
 	// Output:
 	// gauge: <

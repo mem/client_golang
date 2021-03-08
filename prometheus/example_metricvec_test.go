@@ -17,7 +17,8 @@ import (
 	//lint:ignore SA1019 Need to keep deprecated package for compatibility.
 	"fmt"
 
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/encoding/prototext"
+	"google.golang.org/protobuf/proto"
 
 	dto "github.com/prometheus/client_model/go"
 
@@ -128,7 +129,7 @@ func ExampleMetricVec() {
 	if err != nil || len(metricFamilies) != 1 {
 		panic("unexpected behavior of custom test registry")
 	}
-	fmt.Println(proto.MarshalTextString(metricFamilies[0]))
+	fmt.Println(prototext.Format(metricFamilies[0]))
 
 	// Output:
 	// name: "library_version_info"

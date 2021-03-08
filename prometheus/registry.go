@@ -27,8 +27,8 @@ import (
 
 	"github.com/cespare/xxhash/v2"
 	//lint:ignore SA1019 Need to keep deprecated package for compatibility.
-	"github.com/golang/protobuf/proto"
 	"github.com/prometheus/common/expfmt"
+	"google.golang.org/protobuf/proto"
 
 	dto "github.com/prometheus/client_model/go"
 
